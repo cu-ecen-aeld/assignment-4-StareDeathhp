@@ -1,4 +1,1 @@
-config BR2_PACKAGE_AESD_ASSIGNMENTS
-    bool "aesd-assignments"
-    help
-      Package that installs finder.sh, writer, tester.sh, conf files
+source "$BR2_EXTERNAL_project_base_PATH/package/aesd-assignments/Config.in"
