@@ -1,5 +1,0 @@
-project(aesd_assignments)
-  external-desc
-    site     "git@github.com:yourusername/assignments-3-and-later-<YourGHUsername>.git"
-    tag      "main"
-    packages "finder-app"
