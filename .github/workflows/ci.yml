@@ -1,0 +1,30 @@
+name: Build and Test Buildroot
+
+on:
+  push:
+
+jobs:
+  buildroot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo + submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Ensure clean known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keygen -R github.com || true
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Load SSH deploy key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Build Buildroot image
+        run: ./build.sh
+
+      - name: Run full-test
+        run: ./full-test.sh
